@@ -61,7 +61,6 @@ open index.html   # ou double-cliquez sur le fichier
 ├── panier.html           Panier d'achat
 ├── compte.html           Inscription / connexion
 ├── mes-commandes.html    Suivi des commandes et factures
-├── equipe.html           L'équipe
 ├── contact.html          Contact
 ├── *-en.html             Versions anglaises
 ├── app.js                Logique commune (navigation, panier, commandes)
