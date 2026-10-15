@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte - SauveTaBouffe</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="barre-nav">
+    <div class="nav-logo">
+        <div class="nav-logo-img">
+            <img src="image/logo.png" alt="SauveTaBouffe" style="width:100%;height:100%;border-radius:50%;">
+        </div>
+        <span>SauveTaBouffe</span>
+    </div>
+
+    <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="prestations.html">Prestations</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="compte.html">Compte</a></li>
+    </ul>
+</nav>
+
+<section class="section-compte">
+    <div class="carte-compte">
+        <h2>Mon compte</h2>
+        <p class="compte-intro">Connectez-vous ou créez votre compte SauveTaBouffe.</p>
+
+        <div id="message-compte" class="message-compte" aria-live="polite"></div>
+
+        <div id="espace-connecte" class="espace-connecte">
+            <div class="icone-compte">✓</div>
+            <h3>Vous êtes connecté !</h3>
+            <p id="bienvenue-compte"></p>
+            <div class="actions-compte"><button type="button" id="modifier-profil" class="bouton1 secondaire">Modifier mon profil</button><button type="button" id="deconnexion" class="bouton1">Se déconnecter</button></div>
+            <form id="form-profil" class="form-profil" hidden>
+              <label for="profil-nom">Nom</label><input id="profil-nom" type="text" required>
+              <label for="profil-email">Adresse e-mail</label><input id="profil-email" type="email" required>
+              <button class="bouton1" type="submit">Enregistrer les modifications</button>
+            </form><div id="reservations-compte"><h3>Mes réservations</h3><ul id="liste-reservations"></ul><a class="lien-commandes" href="mes-commandes.html">Voir toutes mes commandes →</a></div>
+        </div>
+
+        <div id="zone-authentification">
+        <div class="onglets-compte">
+            <button type="button" class="onglet-compte actif" data-cible="connexion">Se connecter</button>
+            <button type="button" class="onglet-compte" data-cible="creation">Créer un compte</button>
+        </div>
+
+        <form id="connexion" class="formulaire-compte actif">
+            <label for="email-connexion">Adresse e-mail</label>
+            <input id="email-connexion" type="email" placeholder="exemple@email.fr" required>
+
+            <label for="mdp-connexion">Mot de passe</label>
+            <input id="mdp-connexion" type="password" placeholder="Votre mot de passe" required>
+
+            <button type="submit" class="bouton1">Se connecter</button>
+        </form>
+
+        <form id="creation" class="formulaire-compte">
+            <label for="nom-creation">Nom</label>
+            <input id="nom-creation" type="text" placeholder="Votre nom" required>
+
+            <label for="email-creation">Adresse e-mail</label>
+            <input id="email-creation" type="email" placeholder="exemple@email.fr" required>
+
+            <label for="mdp-creation">Mot de passe</label>
+            <input id="mdp-creation" type="password" placeholder="Créez un mot de passe" required>
+
+            <label for="confirmation-mdp">Confirmer le mot de passe</label>
+            <input id="confirmation-mdp" type="password" placeholder="Confirmez le mot de passe" required>
+
+            <button type="submit" class="bouton1">Créer mon compte</button>
+        </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61586650501807" target="_blank" aria-label="Facebook"><img src="image/FaceBook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/sauvetabouffe_lens/" target="_blank" aria-label="Instagram"><img src="image/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.tiktok.com/@sauvetabouffe62" target="_blank" aria-label="TikTok"><img src="image/TikTok.png" alt="TikTok"></a>
+        <a href="https://www.youtube.com/@SauveTaBouffe62" target="_blank" aria-label="YouTube"><img src="image/YouTube.png" alt="YouTube"></a>
+    </div>
+    <p>&copy; 2025 SauveTaBouffe - Lutter contre le gaspillage alimentaire dans le Nord-Pas-de-Calais</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+    const onglets = document.querySelectorAll('.onglet-compte');
+    const formulaires = document.querySelectorAll('.formulaire-compte');
+    const formulaireConnexion = document.getElementById('connexion');
+    const formulaireCreation = document.getElementById('creation');
+    const messageCompte = document.getElementById('message-compte');
+    const zoneAuthentification = document.getElementById('zone-authentification');
+    const espaceConnecte = document.getElementById('espace-connecte');
+    const bienvenueCompte = document.getElementById('bienvenue-compte');
+    const boutonDeconnexion = document.getElementById('deconnexion');
+    const listeReservations = document.getElementById('liste-reservations');
+    const boutonModifierProfil = document.getElementById('modifier-profil');
+    const formProfil = document.getElementById('form-profil');
+
+    function afficherMessage(texte, type) {
+        messageCompte.textContent = texte;
+        messageCompte.className = 'message-compte visible ' + type;
+        if (typeof afficherNotificationGlobale === 'function') {
+            afficherNotificationGlobale(texte, type);
+        }
+    }
+
+    function masquerMessage() {
+        messageCompte.textContent = '';
+        messageCompte.className = 'message-compte';
+    }
+
+    function lireReservations() {
+        return JSON.parse(localStorage.getItem('sauveTaBouffeReservations') || '[]');
+    }
+
+    function afficherReservations() {
+        const reservations = lireReservations();
+        listeReservations.innerHTML = '';
+
+        if (reservations.length === 0) {
+            listeReservations.innerHTML = '<li class="reservation-vide">Aucune réservation pour le moment.</li>';
+            return;
+        }
+
+        reservations.slice().reverse().forEach(reservation => {
+            const ligne = document.createElement('li');
+            ligne.className = 'carte-historique';
+            ligne.innerHTML = `
+                <div class="historique-entete">
+                    <strong>${reservation.panier}</strong>
+                    <span class="statut-reservation">${statutCommande(reservation)}</span>
+                </div>
+                <div class="historique-details">
+                    <span>📅 ${reservation.date}</span>
+                    <span>🧺 Quantité : ${reservation.quantite}</span>
+                    <span>📍 ${reservation.retrait}</span>
+                    <span>💶 ${Number(reservation.total).toLocaleString('fr-FR', {style:'currency', currency:'EUR'})}</span>
+                </div>
+                <small>Référence : ${reservation.reference}</small>
+                <div class="commandes-actions"><a class="bouton-mini secondaire" href="mes-commandes.html#${reservation.reference}">Voir le suivi</a><button class="bouton-mini" type="button" onclick="telechargerFacture('${reservation.reference}')">Facture PDF</button></div>`;
+            listeReservations.appendChild(ligne);
+        });
+    }
+
+    function afficherConnexion(nom, email) {
+        zoneAuthentification.style.display = 'none';
+        espaceConnecte.classList.add('visible');
+        bienvenueCompte.textContent = 'Bienvenue ' + nom + ' ! Vous êtes connecté avec l’adresse ' + email + '.';
+        afficherReservations();
+    }
+
+    function afficherFormulaires() {
+        espaceConnecte.classList.remove('visible');
+        zoneAuthentification.style.display = 'block';
+    }
+
+    boutonModifierProfil.addEventListener('click', () => {
+        const compte = JSON.parse(localStorage.getItem('sauveTaBouffeCompte') || 'null');
+        if (!compte) return;
+        document.getElementById('profil-nom').value = compte.nom || '';
+        document.getElementById('profil-email').value = compte.email || '';
+        formProfil.hidden = !formProfil.hidden;
+    });
+    formProfil.addEventListener('submit', event => {
+        event.preventDefault();
+        const compte = JSON.parse(localStorage.getItem('sauveTaBouffeCompte') || '{}');
+        compte.nom = document.getElementById('profil-nom').value.trim();
+        compte.email = document.getElementById('profil-email').value.trim().toLowerCase();
+        localStorage.setItem('sauveTaBouffeCompte', JSON.stringify(compte));
+        bienvenueCompte.textContent = 'Bienvenue ' + compte.nom + ' ! Vous êtes connecté avec l’adresse ' + compte.email + '.';
+        formProfil.hidden = true;
+        afficherMessage('Votre profil a été mis à jour.', 'succes');
+    });
+
+    onglets.forEach(onglet => {
+        onglet.addEventListener('click', () => {
+            masquerMessage();
+            onglets.forEach(element => element.classList.remove('actif'));
+            formulaires.forEach(element => element.classList.remove('actif'));
+            onglet.classList.add('actif');
+            document.getElementById(onglet.dataset.cible).classList.add('actif');
+        });
+    });
+
+    formulaireCreation.addEventListener('submit', event => {
+        event.preventDefault();
+        const nom = document.getElementById('nom-creation').value.trim();
+        const email = document.getElementById('email-creation').value.trim().toLowerCase();
+        const motDePasse = document.getElementById('mdp-creation').value;
+        const confirmation = document.getElementById('confirmation-mdp').value;
+
+        if (motDePasse.length < 6) {
+            afficherMessage('Le mot de passe doit contenir au moins 6 caractères.', 'erreur');
+            return;
+        }
+        if (motDePasse !== confirmation) {
+            afficherMessage('Les deux mots de passe ne correspondent pas.', 'erreur');
+            return;
+        }
+
+        localStorage.setItem('sauveTaBouffeCompte', JSON.stringify({ nom, email, motDePasse }));
+        localStorage.setItem('sauveTaBouffeConnecte', 'oui');
+        afficherConnexion(nom, email);
+        afficherMessage('Votre compte a bien été créé et vous êtes connecté.', 'succes');
+        formulaireCreation.reset();
+    });
+
+    formulaireConnexion.addEventListener('submit', event => {
+        event.preventDefault();
+        const email = document.getElementById('email-connexion').value.trim().toLowerCase();
+        const motDePasse = document.getElementById('mdp-connexion').value;
+        const compte = JSON.parse(localStorage.getItem('sauveTaBouffeCompte') || 'null');
+
+        if (!compte || compte.email.toLowerCase() !== email || compte.motDePasse !== motDePasse) {
+            afficherMessage('Adresse e-mail ou mot de passe incorrect.', 'erreur');
+            return;
+        }
+
+        localStorage.setItem('sauveTaBouffeConnecte', 'oui');
+        afficherConnexion(compte.nom, compte.email);
+        afficherMessage('Connexion réussie. Heureux de vous revoir !', 'succes');
+        formulaireConnexion.reset();
+    });
+
+    boutonDeconnexion.addEventListener('click', () => {
+        localStorage.removeItem('sauveTaBouffeConnecte');
+        afficherFormulaires();
+        afficherMessage('Vous êtes maintenant déconnecté.', 'succes');
+    });
+
+    const compteEnregistre = JSON.parse(localStorage.getItem('sauveTaBouffeCompte') || 'null');
+    const estConnecte = localStorage.getItem('sauveTaBouffeConnecte') === 'oui';
+    if (compteEnregistre && estConnecte) afficherConnexion(compteEnregistre.nom, compteEnregistre.email);
+</script>
+</body>
+</html>

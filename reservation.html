@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réserver un panier - SauveTaBouffe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="barre-nav">
+    <div class="nav-logo">
+        <div class="nav-logo-img">
+            <img src="image/logo.png" alt="SauveTaBouffe" style="width:100%;height:100%;border-radius:50%;">
+        </div>
+        <span>SauveTaBouffe</span>
+    </div>
+    <a href="prestations.html" class="retour-prestations">← Retour aux paniers</a>
+</nav>
+
+<main class="section-reservation">
+    <div class="carte-reservation">
+        <div class="en-tete-reservation">
+            <span class="icone-reservation">🧺</span>
+            <div>
+                <h1>Réserver mon panier</h1>
+                <p>Choisissez votre panier et votre créneau de retrait.</p>
+            </div>
+        </div>
+
+        <form id="form-reservation">
+            <div class="grille-formulaire">
+                <div class="champ-reservation champ-large">
+                    <label for="panier">Panier choisi</label>
+                    <select id="panier" name="panier" required>
+                        <option value="solo" data-prix="4.99">Le Solo — 4,99 €</option>
+                        <option value="duo" data-prix="8.99">Le Duo — 8,99 €</option>
+                        <option value="familial" data-prix="14.99">Le Familial — 14,99 €</option>
+                    </select>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="quantite">Quantité</label>
+                    <input type="number" id="quantite" name="quantite" min="1" max="10" value="1" required>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="date">Date de retrait</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+
+
+                <div class="champ-reservation">
+                    <label for="creneau">Créneau de retrait</label>
+                    <select id="creneau" name="creneau" required>
+                        <option value="">Choisissez un créneau</option>
+                        <option>10 h 00 - 11 h 00</option>
+                        <option>12 h 00 - 13 h 00</option>
+                        <option>16 h 00 - 17 h 00</option>
+                        <option>18 h 00 - 19 h 00</option>
+                    </select>
+                </div>
+
+                <div class="champ-reservation champ-large">
+                    <label for="retrait">Point de retrait</label>
+                    <select id="retrait" name="retrait" required>
+                        <option value="">Sélectionnez un point de retrait</option>
+                        <option>SauveTaBouffe Lens</option>
+                        <option>Entrepôt partenaire Lens</option>
+                        <option>Commerce partenaire du centre-ville</option>
+                    </select>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="prenom">Prénom</label>
+                    <input type="text" id="prenom" name="prenom" required>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="nom">Nom</label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="champ-reservation">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+            </div>
+
+            <section class="bloc-paiement" aria-labelledby="titre-paiement">
+                <div class="paiement-entete">
+                    <div>
+                        <span class="paiement-etape">Paiement sécurisé</span>
+                        <h2 id="titre-paiement">Régler maintenant</h2>
+                    </div>
+                    <span class="paiement-cadenas" aria-hidden="true">🔒</span>
+                </div>
+
+                <div class="grille-paiement">
+                    <div class="champ-reservation champ-large">
+                        <label for="titulaire">Nom du titulaire</label>
+                        <input type="text" id="titulaire" name="titulaire" autocomplete="cc-name" placeholder="PAUL DUPONT" required>
+                    </div>
+                    <div class="champ-reservation champ-large">
+                        <label for="numero-carte">Numéro de carte</label>
+                        <div class="champ-carte">
+                            <input type="text" id="numero-carte" name="numero-carte" inputmode="numeric" autocomplete="cc-number" maxlength="19" placeholder="1234 5678 9012 3456" required>
+                            <span aria-hidden="true">💳</span>
+                        </div>
+                    </div>
+                    <div class="champ-reservation">
+                        <label for="expiration">Expiration</label>
+                        <input type="text" id="expiration" name="expiration" inputmode="numeric" autocomplete="cc-exp" maxlength="5" placeholder="MM/AA" required>
+                    </div>
+                    <div class="champ-reservation">
+                        <label for="cvv">Cryptogramme</label>
+                        <input type="password" id="cvv" name="cvv" inputmode="numeric" autocomplete="cc-csc" maxlength="3" placeholder="123" required>
+                    </div>
+                </div>
+                <p class="paiement-info">Démonstration : aucune donnée bancaire n’est transmise et aucun débit réel n’est effectué.</p>
+            </section>
+
+            <div class="resume-reservation">
+                <div>
+                    <span>Total à payer maintenant</span>
+                    <strong id="total">4,99 €</strong>
+                </div>
+                <p>Votre réservation sera confirmée après validation du paiement.</p>
+            </div>
+
+            <button type="submit" class="bouton-reserver-direct">Payer et confirmer la réservation</button>
+        </form>
+
+        <div id="confirmation-reservation" class="confirmation-reservation" hidden>
+            <div class="confirmation-icone">✓</div>
+            <h2>Paiement accepté !</h2>
+            <p id="message-confirmation"></p>
+            <div class="confirmation-qr">
+                <img id="qr-confirmation" alt="QR code de la réservation">
+                <div><h3>Votre QR code de retrait</h3><p>Présentez ce code au point de retrait pour retrouver rapidement votre commande.</p><div class="suivi-commande"><div class="etape-suivi active">En préparation</div><div class="etape-suivi">Prête à récupérer</div><div class="etape-suivi">Récupérée</div></div></div>
+            </div>
+            <div class="commandes-actions"><button type="button" id="facture-confirmation" class="bouton-mini">Télécharger la facture</button><a href="mes-commandes.html" class="bouton-mini secondaire">Voir mes commandes</a><a href="prestations.html" class="bouton-retour-paniers">Voir les autres paniers</a></div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61586650501807" target="_blank" aria-label="Facebook"><img src="image/FaceBook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/sauvetabouffe_lens/" target="_blank" aria-label="Instagram"><img src="image/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.tiktok.com/@sauvetabouffe62" target="_blank" aria-label="TikTok"><img src="image/TikTok.png" alt="TikTok"></a>
+        <a href="https://www.youtube.com/@SauveTaBouffe62" target="_blank" aria-label="YouTube"><img src="image/YouTube.png" alt="YouTube"></a>
+    </div>
+    <p>&copy; 2025 SauveTaBouffe - Lutter contre le gaspillage alimentaire dans le Nord-Pas-de-Calais</p>
+</footer>
+
+<script>
+const panier = document.getElementById('panier');
+const quantite = document.getElementById('quantite');
+const dateRetrait = document.getElementById('date');
+const total = document.getElementById('total');
+const formulaire = document.getElementById('form-reservation');
+const confirmation = document.getElementById('confirmation-reservation');
+const numeroCarte = document.getElementById('numero-carte');
+const expiration = document.getElementById('expiration');
+const cvv = document.getElementById('cvv');
+const titulaire = document.getElementById('titulaire');
+const compte = JSON.parse(localStorage.getItem('sauveTaBouffeCompte') || 'null');
+const estConnecte = localStorage.getItem('sauveTaBouffeConnecte') === 'oui';
+const stockInitial = { solo: 12, duo: 7, familial: 4 };
+
+if (compte && estConnecte) {
+    document.getElementById('nom').value = compte.nom || '';
+    document.getElementById('email').value = compte.email || '';
+    titulaire.value = (compte.nom || '').toUpperCase();
+}
+
+numeroCarte.addEventListener('input', () => {
+    numeroCarte.value = numeroCarte.value.replace(/\D/g, '').slice(0, 16).replace(/(.{4})/g, '$1 ').trim();
+});
+expiration.addEventListener('input', () => {
+    const chiffres = expiration.value.replace(/\D/g, '').slice(0, 4);
+    expiration.value = chiffres.length > 2 ? chiffres.slice(0, 2) + '/' + chiffres.slice(2) : chiffres;
+});
+cvv.addEventListener('input', () => { cvv.value = cvv.value.replace(/\D/g, '').slice(0, 3); });
+
+const params = new URLSearchParams(window.location.search);
+const parametrePanier = params.get('panier');
+if (['solo', 'duo', 'familial'].includes(parametrePanier)) panier.value = parametrePanier;
+
+const commandePanier = JSON.parse(localStorage.getItem('sauveTaBouffeCommande') || '[]');
+if (params.get('commande') === 'panier' && commandePanier.length) {
+    const premier = commandePanier[0];
+    panier.value = premier.id;
+    quantite.value = premier.quantite;
+}
+
+const demain = new Date();
+demain.setDate(demain.getDate() + 1);
+const dateMinimum = demain.toISOString().split('T')[0];
+dateRetrait.min = dateMinimum;
+dateRetrait.value = dateMinimum;
+
+function calculerTotal() {
+    const option = panier.options[panier.selectedIndex];
+    return Number(option.dataset.prix) * Math.max(1, Number(quantite.value) || 1);
+}
+
+function actualiserTotal() {
+    total.textContent = calculerTotal().toLocaleString('fr-FR', {style: 'currency', currency: 'EUR'});
+}
+
+panier.addEventListener('change', actualiserTotal);
+quantite.addEventListener('input', actualiserTotal);
+actualiserTotal();
+
+formulaire.addEventListener('submit', function(event) {
+    event.preventDefault();
+    if (!formulaire.checkValidity()) {
+        formulaire.reportValidity();
+        return;
+    }
+
+    const numeroNettoye = numeroCarte.value.replace(/\s/g, '');
+    const expirationValide = /^(0[1-9]|1[0-2])\/\d{2}$/.test(expiration.value);
+    if (!/^\d{16}$/.test(numeroNettoye)) {
+        afficherNotificationGlobale('Saisissez un numéro de carte de 16 chiffres.', 'erreur');
+        numeroCarte.focus();
+        return;
+    }
+    if (!expirationValide) {
+        afficherNotificationGlobale('Saisissez une date d’expiration valide au format MM/AA.', 'erreur');
+        expiration.focus();
+        return;
+    }
+    if (!/^\d{3}$/.test(cvv.value)) {
+        afficherNotificationGlobale('Saisissez un cryptogramme de 3 chiffres.', 'erreur');
+        cvv.focus();
+        return;
+    }
+
+    const idPanier = panier.value;
+    const stocks = JSON.parse(localStorage.getItem('sauveTaBouffeStocks') || 'null') || {...stockInitial};
+    const quantiteDemandee = Number(quantite.value);
+    if (quantiteDemandee > (stocks[idPanier] || 0)) { afficherNotificationGlobale('Stock insuffisant pour cette quantité.', 'erreur'); return; }
+    const nomPanier = panier.options[panier.selectedIndex].text.split(' — ')[0];
+    const dateFormatee = new Date(dateRetrait.value + 'T12:00:00').toLocaleDateString('fr-FR');
+    const reference = 'STB-' + Date.now().toString().slice(-6);
+    const reservation = {
+        reference,
+        panier: nomPanier,
+        quantite: Number(quantite.value),
+        date: dateFormatee,
+        retrait: document.getElementById('retrait').value + ' — ' + document.getElementById('creneau').value,
+        total: calculerTotal(),
+        statut: 'En préparation',
+        paiement: 'Carte •••• ' + numeroNettoye.slice(-4),
+        email: document.getElementById('email').value.trim(),
+        creeLe: new Date().toISOString()
+    };
+
+    const reservations = JSON.parse(localStorage.getItem('sauveTaBouffeReservations') || '[]');
+    reservations.push(reservation);
+    stocks[idPanier] -= quantiteDemandee;
+    localStorage.setItem('sauveTaBouffeStocks', JSON.stringify(stocks));
+    localStorage.setItem('sauveTaBouffeReservations', JSON.stringify(reservations));
+    localStorage.removeItem('sauveTaBouffeCommande');
+    localStorage.removeItem('sauveTaBouffePanier');
+
+    document.getElementById('message-confirmation').textContent =
+        `${reservation.quantite} × ${nomPanier} payé(s) et réservé(s) pour le ${dateFormatee}. Référence : ${reference}.`;
+    document.getElementById('qr-confirmation').src = urlQRCode(reservation);
+    document.getElementById('facture-confirmation').onclick = () => telechargerFacture(reference);
+
+    formulaire.hidden = true;
+    confirmation.hidden = false;
+    sessionStorage.setItem('sauveTaBouffeNotification', 'Paiement accepté : votre réservation est confirmée.');
+    if (typeof afficherNotificationGlobale === 'function') {
+        afficherNotificationGlobale('Paiement accepté et réservation ajoutée à votre historique.', 'succes');
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
+</script>
+<script src="app.js"></script>
+</body>
+</html>

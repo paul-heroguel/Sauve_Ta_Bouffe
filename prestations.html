@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Prestations - SauveTaBouffe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="barre-nav">
+    <div class="nav-logo">
+        <div class="nav-logo-img">
+            <img src="image/logo.png" alt="SauveTaBouffe" style="width:100%;height:100%;border-radius:50%;">
+        </div>
+        <span>SauveTaBouffe</span>
+    </div>
+
+    <ul class="nav-menu">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="about.html">À propos</a></li>
+        <li><a href="prestations.html">Prestations</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="compte.html">Compte</a></li>
+            <li><a href="mes-commandes.html">Mes commandes</a></li>
+        <li class="nav-lang">
+            <a href="prestations-en.html" title="Switch to English">
+                <img src="image/royaume-uni.png" alt="English" class="flag-icon">
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<section class="contenu3">
+    <div class="en-tete">
+        <h2>Le fonctionnement</h2>
+        <p class="sous-titre">Trois étapes simples pour sauver la nourriture !</p>
+    </div>
+
+    <div class="grille-etapes">
+        <div class="case">
+            <div class="badge">1</div>
+            <h3>Chercher la nourriture</h3>
+            <p>Nous allons récupérer des produits invendus dans les supermarchés et les commerces locaux.</p>
+        </div>
+
+        <div class="image-prestation">
+            <img src="image/supermarchet.png" alt="Supermarché">
+        </div>
+        
+        <div class="image-prestation">
+            <img src="image/entrepot.png" alt="Entrepôt et logistique">
+        </div>
+
+        <div class="case">
+            <div class="badge">2</div>
+            <h3>Stockage</h3>
+            <p>Nous stockons les produits récupérés dans nos entrepôts sécurisés. Afin de préparer les paniers mis à disposition.</p>
+        </div>
+        <div class="case">
+            <div class="badge">3</div>
+            <h3>Vente</h3>
+            <p>Mise en vente de nos paniers de produits invendus à des prix réduits.</p>
+        </div>
+        <div class="image-prestation">
+            <img src="image/commande.png" alt="Entrepôt">
+        </div>
+    </div>
+</section>
+<section class="section-paniers">
+    <div class="en-tete">
+        <h2>Nos Paniers Anti-Gaspi</h2>
+        <p class="sous-titre">Choisissez la taille qui vous convient</p>
+    </div>
+
+    <div class="grille-paniers">
+        <div class="carte-panier">
+            <div class="panier-icon">🥗</div>
+            <h3>Le Solo</h3>
+            <p class="panier-description">Idéal pour une personne. Un assortiment de fruits, légumes et snacks pour 2-3 jours.</p>
+            <div class="prix">4,99€</div>
+            <p class="stock-panier" data-stock="solo"></p>
+            <button type="button" class="bouton-panier ajouter-panier" data-panier="solo" data-stock-initial="12" data-nom="Le Solo" data-prix="4.99">Ajouter au panier</button>
+        </div>
+
+        <div class="carte-panier populaire">
+            <div class="badge-populaire">Plus Populaire</div>
+            <div class="panier-icon">🧺</div>
+            <h3>Le Duo</h3>
+            <p class="panier-description">Parfait pour un couple. Contient des produits frais et quelques produits d'épicerie fine.</p>
+            <div class="prix">8,99€</div>
+            <p class="stock-panier" data-stock="duo"></p>
+            <button type="button" class="bouton-panier ajouter-panier" data-panier="duo" data-stock-initial="7" data-nom="Le Duo" data-prix="8.99">Ajouter au panier</button>
+        </div>
+
+        <div class="carte-panier">
+            <div class="panier-icon">🏠</div>
+            <h3>Le Familial</h3>
+            <p class="panier-description">Pour toute la famille. Un grand carton rempli de produits variés pour toute la semaine.</p>
+            <div class="prix">14,99€</div>
+            <p class="stock-panier" data-stock="familial"></p>
+            <button type="button" class="bouton-panier ajouter-panier" data-panier="familial" data-stock-initial="4" data-nom="Le Familial" data-prix="14.99">Ajouter au panier</button>
+        </div>
+    </div>
+</section>
+
+
+<section class="section-plus">
+  <div class="bloc-plus">
+    <h2>Avis de nos clients</h2>
+    <div class="grille-avis">
+      <article><div class="etoiles">★★★★★</div><p>« Panier très généreux et produits encore très frais. »</p><strong>— Marie</strong></article>
+      <article><div class="etoiles">★★★★★</div><p>« Simple à réserver et très bon rapport qualité-prix. »</p><strong>— Lucas</strong></article>
+      <article><div class="etoiles">★★★★☆</div><p>« Une bonne surprise à chaque retrait. »</p><strong>— Inès</strong></article>
+    </div>
+  </div>
+  <div class="bloc-plus">
+    <h2>Questions fréquentes</h2>
+    <details><summary>Comment récupérer mon panier ?</summary><p>Présentez votre référence de réservation au point de retrait sélectionné.</p></details>
+    <details><summary>Puis-je annuler ?</summary><p>Vous pouvez contacter SauveTaBouffe avant le créneau choisi pour demander une annulation.</p></details>
+    <details><summary>Quand dois-je payer ?</summary><p>Le paiement par carte est effectué directement en ligne avant la confirmation de la réservation.</p></details>
+  </div>
+  <div class="bloc-plus">
+    <h2>Lieu de retrait principal</h2>
+    <div class="carte-lieu">
+      <iframe title="Carte du point de retrait à Lens" src="https://www.openstreetmap.org/export/embed.html?bbox=2.79%2C50.40%2C2.86%2C50.45&amp;layer=mapnik" loading="lazy"></iframe>
+      <p><strong>SauveTaBouffe Lens</strong><br>Retrait sur réservation aux horaires proposés.</p>
+    </div>
+  </div>
+</section>
+
+<a href="panier.html" class="panier-flottant" aria-label="Voir mon panier">🛒 <span id="compteur-panier">0</span></a>
+<div id="notification-panier" class="notification-panier" aria-live="polite"></div>
+
+<footer>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61586650501807" target="_blank" aria-label="Facebook">
+            <img src="image/FaceBook.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/sauvetabouffe_lens/" target="_blank" aria-label="Instagram">
+            <img src="image/Instagram.png" alt="Instagram">
+        </a>
+        <a href="https://www.tiktok.com/@sauvetabouffe62" target="_blank" aria-label="TikTok">
+            <img src="image/TikTok.png" alt="TikTok">
+        </a>
+        <a href="https://www.youtube.com/@SauveTaBouffe62" target="_blank" aria-label="YouTube">
+            <img src="image/YouTube.png" alt="YouTube">
+        </a>
+    </div>
+    <p>&copy; 2025 SauveTaBouffe - Lutter contre le gaspillage alimentaire dans le Nord-Pas-de-Calais</p>
+</footer>
+
+
+<script>
+const boutonsPanier = document.querySelectorAll('.ajouter-panier');
+const compteurPanier = document.getElementById('compteur-panier');
+const notificationPanier = document.getElementById('notification-panier');
+const stockInitial = { solo: 12, duo: 7, familial: 4 };
+function lirePanier(){ return JSON.parse(localStorage.getItem('sauveTaBouffePanier') || '[]'); }
+function lireStocks(){ const s=JSON.parse(localStorage.getItem('sauveTaBouffeStocks') || 'null'); return s || {...stockInitial}; }
+function sauverStocks(stocks){ localStorage.setItem('sauveTaBouffeStocks', JSON.stringify(stocks)); }
+function enregistrerPanier(panier){ localStorage.setItem('sauveTaBouffePanier', JSON.stringify(panier)); actualiserCompteur(); actualiserStocks(); }
+function actualiserCompteur(){ compteurPanier.textContent=lirePanier().reduce((s,a)=>s+a.quantite,0); }
+function afficherNotification(message){ notificationPanier.textContent=message; notificationPanier.classList.add('visible'); setTimeout(()=>notificationPanier.classList.remove('visible'),2200); }
+function actualiserStocks(){
+ const stocks=lireStocks(), panier=lirePanier();
+ document.querySelectorAll('.stock-panier').forEach(el=>{
+  const id=el.dataset.stock, reserve=(panier.find(a=>a.id===id)||{}).quantite||0, restant=Math.max(0,stocks[id]-reserve);
+  const btn=document.querySelector(`.ajouter-panier[data-panier="${id}"]`);
+  el.textContent=restant===0?'🔴 Rupture de stock':restant<=3?`🟠 Plus que ${restant} panier(s) !`:`🟢 ${restant} paniers disponibles`;
+  btn.disabled=restant===0; btn.textContent=restant===0?'Indisponible':'Ajouter au panier';
+ });
+}
+boutonsPanier.forEach(bouton=>bouton.addEventListener('click',()=>{
+ const panier=lirePanier(), stocks=lireStocks(), existant=panier.find(a=>a.id===bouton.dataset.panier);
+ const q=existant?existant.quantite:0;
+ if(q>=stocks[bouton.dataset.panier]){ afficherNotification('Stock maximum atteint'); return; }
+ if(existant) existant.quantite++; else panier.push({id:bouton.dataset.panier,nom:bouton.dataset.nom,prix:Number(bouton.dataset.prix),quantite:1});
+ enregistrerPanier(panier); afficherNotification(bouton.dataset.nom+' ajouté au panier ✓');
+}));
+actualiserCompteur(); actualiserStocks();
+</script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon panier - SauveTaBouffe</title>
+    <link rel="icon" type="image/png" href="image/logo.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="barre-nav">
+    <div class="nav-logo">
+        <div class="nav-logo-img"><img src="image/logo.png" alt="SauveTaBouffe" style="width:100%;height:100%;border-radius:50%;"></div>
+        <span>SauveTaBouffe</span>
+    </div>
+    <a href="prestations.html" class="retour-prestations">← Continuer mes achats</a>
+</nav>
+
+<main class="section-panier-page">
+    <div class="carte-panier-page">
+        <div class="en-tete-panier-page">
+            <span>🛒</span>
+            <div><h1>Mon panier</h1><p>Modifiez les quantités avant de valider votre commande.</p></div>
+        </div>
+        <div id="liste-panier"></div>
+        <div id="panier-vide" class="panier-vide" hidden>
+            <div>🧺</div><h2>Votre panier est vide</h2>
+            <p>Ajoutez un panier anti-gaspi depuis la page Prestations.</p>
+            <a href="prestations.html" class="bouton-retour-paniers">Voir les paniers</a>
+        </div>
+        <div id="resume-panier" class="resume-panier-page">
+            <div><span>Total</span><strong id="total-panier">0,00 €</strong></div>
+            <button type="button" id="valider-panier" class="bouton-reserver-direct">Valider la commande</button>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-socials">
+        <a href="https://www.facebook.com/profile.php?id=61586650501807" target="_blank" aria-label="Facebook"><img src="image/FaceBook.png" alt="Facebook"></a>
+        <a href="https://www.instagram.com/sauvetabouffe_lens/" target="_blank" aria-label="Instagram"><img src="image/Instagram.png" alt="Instagram"></a>
+        <a href="https://www.tiktok.com/@sauvetabouffe62" target="_blank" aria-label="TikTok"><img src="image/TikTok.png" alt="TikTok"></a>
+        <a href="https://www.youtube.com/@SauveTaBouffe62" target="_blank" aria-label="YouTube"><img src="image/YouTube.png" alt="YouTube"></a>
+    </div>
+    <p>&copy; 2025 SauveTaBouffe - Lutter contre le gaspillage alimentaire dans le Nord-Pas-de-Calais</p>
+</footer>
+
+<script>
+const listePanier = document.getElementById('liste-panier');
+const panierVide = document.getElementById('panier-vide');
+const resumePanier = document.getElementById('resume-panier');
+const totalPanier = document.getElementById('total-panier');
+const boutonValider = document.getElementById('valider-panier');
+
+function lirePanier() { return JSON.parse(localStorage.getItem('sauveTaBouffePanier') || '[]'); }
+function enregistrerPanier(panier) { localStorage.setItem('sauveTaBouffePanier', JSON.stringify(panier)); afficherPanier(); }
+function prixFrancais(prix) { return prix.toLocaleString('fr-FR', {style:'currency', currency:'EUR'}); }
+
+function changerQuantite(id, changement) {
+    const panier = lirePanier();
+    const article = panier.find(element => element.id === id);
+    if (!article) return;
+    article.quantite += changement;
+    if (article.quantite <= 0) panier.splice(panier.indexOf(article), 1);
+    enregistrerPanier(panier);
+}
+
+function supprimerArticle(id) {
+    enregistrerPanier(lirePanier().filter(article => article.id !== id));
+}
+
+function afficherPanier() {
+    const panier = lirePanier();
+    listePanier.innerHTML = '';
+    const vide = panier.length === 0;
+    panierVide.hidden = !vide;
+    resumePanier.hidden = vide;
+    if (vide) return;
+
+    let total = 0;
+    panier.forEach(article => {
+        total += article.prix * article.quantite;
+        const ligne = document.createElement('div');
+        ligne.className = 'ligne-panier';
+        ligne.innerHTML = `
+            <div class="icone-ligne-panier">${article.id === 'solo' ? '🥗' : article.id === 'duo' ? '🧺' : '🏠'}</div>
+            <div class="infos-ligne-panier"><h3>${article.nom}</h3><p>${prixFrancais(article.prix)} l'unité</p></div>
+            <div class="quantite-panier">
+                <button type="button" aria-label="Diminuer">−</button><strong>${article.quantite}</strong><button type="button" aria-label="Augmenter">+</button>
+            </div>
+            <strong class="sous-total-panier">${prixFrancais(article.prix * article.quantite)}</strong>
+            <button type="button" class="supprimer-panier" aria-label="Supprimer">×</button>`;
+        const boutons = ligne.querySelectorAll('.quantite-panier button');
+        boutons[0].addEventListener('click', () => changerQuantite(article.id, -1));
+        boutons[1].addEventListener('click', () => changerQuantite(article.id, 1));
+        ligne.querySelector('.supprimer-panier').addEventListener('click', () => supprimerArticle(article.id));
+        listePanier.appendChild(ligne);
+    });
+    totalPanier.textContent = prixFrancais(total);
+}
+
+boutonValider.addEventListener('click', () => {
+    const panier = lirePanier();
+    if (!panier.length) return;
+    localStorage.setItem('sauveTaBouffeCommande', JSON.stringify(panier));
+    window.location.href = 'reservation.html?panier=' + panier[0].id + '&commande=panier';
+});
+
+afficherPanier();
+</script>
+<script src="app.js"></script>
+</body>
+</html>
