@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://heroguelp-collab.github.io/Sauve_Ta_Bouffe/"><b>🌐 Voir le site en ligne · Live demo</b></a>
+  <a href="https://paul-heroguel.github.io/Sauve_Ta_Bouffe/"><b>🌐 Voir le site en ligne · Live demo</b></a>
 </p>
 
 <p align="center">
@@ -46,7 +46,7 @@ de le réserver et de suivre leurs commandes.
 Aucune installation : clonez le dépôt et ouvrez `index.html` dans un navigateur.
 
 ```bash
-git clone https://github.com/heroguelp-collab/Sauve_Ta_Bouffe.git
+git clone https://github.com/paul-heroguel/Sauve_Ta_Bouffe.git
 cd Sauve_Ta_Bouffe
 open index.html   # ou double-cliquez sur le fichier
 ```
